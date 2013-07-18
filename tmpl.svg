@@ -60,7 +60,7 @@
 
   </g>
   <g id="3" font-family="Arial" font-style="italic" font-weight="bold" font-size="<%= fontSize %>" fill="<%= textColor %>" >
-<% _.each(linesUp.reverse(), function(line, index) { %>    
+<% _.each(linesUp.slice(0).reverse(), function(line, index) { %>    
 <text transform="scale(1,1.4)" x="<% print( lineSpace*index + leftMarginUp)%>" y="<% print( height/1.4/2 - lineHeight*index) %>"> <%= line%> </text>
 
   <% }); %>";
@@ -71,7 +71,7 @@
 
 
 
-<% _.each(linesDown.reverse(), function(line, index) { %> 
+<% _.each(linesDown.slice(0).reverse(), function(line, index) { %> 
      <text x="<% print( lineSpace*index + leftMargin) %>" y="<% print( height/1.4 -lineHeight*index -bottomMargin ) %>"  ><%= line%> </text>
 <% }); %>";
 </g>

@@ -1,18 +1,54 @@
 
 <html>
 <head>
+  <script src="jscolor/jscolor.js"></script>
   <script src="require.js"></script>
 </head>
 <body style="margin:0px">
+
+
+<div>
+<form class="myform">
+  <label for="url">Url de l'image</label>
+<input type="text" name="url" class="url" />
+<label for="color"  >Background color</label>
+
+<input class="color" name="color" value="000000" >
+<textarea type="textarea" name="content" cols="20" rows="5" class="content" >
+A 2
+MINUTES 
+DE LA FIN.</textarea>
+<input type="button" name="render" value="render" class="renderButton"/>
+</form>
+</div>
+<div>
 <span class="main">
 </span>
+<div>
 </body>
 <script>
+
+
+
+
+
+var render, data;
+
+
+document.getElementsByClassName("renderButton")[0].onclick=function(){
+  var form = document.getElementsByClassName('myform')[0];
+data.image =  form.getElementsByClassName("url")[0].value || data.image;
+
+data.backgroundColor =  form.getElementsByClassName("color")[0].value || data.backgroundColor;
+data.linesUp =  [].concat(form.getElementsByClassName("content")[0].value.toUpperCase().split('\n')) || data.linesUp;
+
+render();
+}
+
 require(['text'], function(txt){
 require( ['lodash', 'text!tmpl.svg'], function(_,tmpl){
   
-
-var data = {
+  data = {
   image : "http://farm3.static.flickr.com/2760/4131129668_12df0df3d3.jpg",
   textColor : "white",
  // backgroundColor : "#f373ac",
@@ -37,10 +73,14 @@ leftMarginUp:42,
 };
 
 
-
-
+render= function(){
   document.getElementsByClassName('main')[0].innerHTML= _.template( tmpl , data);
+};
+
+
+render();
 });
 });
+
 </script>
 </html>
