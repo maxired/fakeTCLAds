@@ -3,35 +3,104 @@
 <head>
   <script src="jscolor/jscolor.js"></script>
   <script src="require.js"></script>
+  <script src="js/bootstrap.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
 </head>
 <body style="margin:0px">
 
+<div class="container-narrow">
 
-<div>
-<form class="myform">
-  <label for="url">Url de l'image</label>
-<input type="text" name="url" class="url" />
-<label for="color"  >Background color</label>
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="mailto: fakeTCLAds@maxired.fr">Contact</a></li>
+        </ul>
+        <h3 class="muted">fakeTCLAds</h3>
+      </div>
 
-<input class="color" name="color" value="000000" >
-<textarea type="textarea" name="content" cols="20" rows="5" class="content" >
-A 2
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span8">
+          <h4>Resulat</h4>
+          <p><span class="main"></span></p>
+        </div>
+
+        <div class="span4">
+<h4>Reglage</h4>
+          <form class="myform">
+	<label for="url">Url de l'image</label>
+	<input type="text" name="url" class="url" />
+	<label for="color"  >Background color</label>
+	<input class="color" name="color" value="000000" >
+	<textarea type="textarea" name="content" cols="20" rows="5" class="content" >A 2 
 MINUTES 
 DE LA FIN.</textarea>
-<input type="button" name="render" value="render" class="renderButton"/>
+	<input type="button" name="render" value="render" class="btn btn-success renderButton offset7"/>
 </form>
-</div>
-<div>
-<span class="main">
-</span>
-<div>
+
+
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; Maxired & Neonix 2013</p>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
 </body>
+
+
 <script>
-
-
-
-
-
 var render, data;
 
 
