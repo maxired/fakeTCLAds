@@ -1,0 +1,46 @@
+
+<html>
+<head>
+  <script src="require.js"></script>
+</head>
+<body style="margin:0px">
+<span class="main">
+</span>
+</body>
+<script>
+require(['text'], function(txt){
+require( ['lodash', 'text!tmpl.svg'], function(_,tmpl){
+  
+
+var data = {
+  image : "http://farm3.static.flickr.com/2760/4131129668_12df0df3d3.jpg",
+  textColor : "white",
+ // backgroundColor : "#f373ac",
+  backgroundColor : "black",
+ 
+  downTextColor:'#e3001b',
+ // linesUp : ["À 3 ARRÊTS", "DE MON","PLAN CUL."],
+ // linesUp : ["À 5 MIN. DE", "C'EST QUAND","QU'ON ARRIVE."],
+  linesUp : ["À 2", "MINUTES","DE LA FIN."],
+ 
+  linesDown : ["PARTOUT","POUR","TOUS","IL Y A","TCL"," "],
+  height: 480,
+  width : 327,
+
+leftMarginUp:42,
+
+  lineHeight : 27,
+  bottomMargin:10,
+  leftMargin:10,
+  lineSpace: 5,
+  fontSize : 35
+};
+
+
+
+
+  document.getElementsByClassName('main')[0].innerHTML= _.template( tmpl , data);
+});
+});
+</script>
+</html>

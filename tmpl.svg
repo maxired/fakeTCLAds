@@ -1,0 +1,79 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   version="1.2"
+   width="<%= width %>"
+   height="<%= height%>"
+   id="svg2985"
+
+>
+  <defs
+     id="defs2987" />
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+
+  <g
+     id="layer1" />
+  <g
+     id="layer2">
+   
+    <image 
+
+
+
+       xlink:href="<%= image %>"
+       preserveAspectRatio="xMidYMin slice"
+       x="0"
+       y="0"
+       width="<%= width %>"
+       height="<% print( height/2 ) %>"
+       id="image3056" />
+    <rect
+
+       width="<%= width %>"
+       height="<% print( height/2 ) %>"
+       x="0"
+       y="<% print( height/2 ) %>"
+       id="rect3059"
+       style="fill:<%= backgroundColor %>;fill-opacity:1;" />
+      <image
+       xlink:href="http://img10.imageshack.us/img10/3642/f9wl.png"
+       x="66%"
+       y="73%"
+       width="25%"
+       height="25%"
+       id="image3960" />
+
+  </g>
+  <g id="3" font-family="Arial" font-style="italic" font-weight="bold" font-size="<%= fontSize %>" fill="<%= textColor %>" >
+<% _.each(linesUp.reverse(), function(line, index) { %>    
+<text transform="scale(1,1.4)" x="<% print( lineSpace*index + leftMarginUp)%>" y="<% print( height/1.4/2 - lineHeight*index) %>"> <%= line%> </text>
+
+  <% }); %>";
+
+</g>
+
+ <g id="4" font-family="Arial" font-weight="bold" font-style="italic" font-size="<%= fontSize %> " fill="<%= downTextColor  %>"  transform="scale(1,1.4)" word-spacing="-12px" >
+
+
+
+<% _.each(linesDown.reverse(), function(line, index) { %> 
+     <text x="<% print( lineSpace*index + leftMargin) %>" y="<% print( height/1.4 -lineHeight*index -bottomMargin ) %>"  ><%= line%> </text>
+<% }); %>";
+</g>
+
+</svg>
