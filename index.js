@@ -11,6 +11,7 @@ app.use(express.methodOverride());
 
 app.use(express.static('public'));
 var fs = require('fs');
+var path = require('path');
 
 function hash(content) {
 	var shasum = crypto.createHash('sha1');
@@ -22,7 +23,7 @@ function hash(content) {
 app.post('/image', function(req, res) {
 
 	console.log(req);
-	var hashed = hash(req.body.content);
+	var hashed = hash(req.body.svg);
 
 	collection.findOne({
 		_id: hashed
@@ -33,7 +34,8 @@ app.post('/image', function(req, res) {
 
 		collection.insert({
 			_id: hashed,
-			content: req.body.content
+			svg: req.body.svg,
+			date: +new Date()
 		}, function(err, docs) {
 			if (err || !docs || docs.length != 1) {
 				return res.send(500, "oups something went wrong, please try again");
@@ -43,43 +45,57 @@ app.post('/image', function(req, res) {
 	})
 })
 
+app.get('/image/latests', function(req, res) {
+	var cursor = collection.find().sort({
+		date: -1
+	}).limit(10);
+
+	cursor.toArray(function(err, docs) {
+		res.json(docs);
+	})
+})
+
 app.get('/image/:id', function(req, res) {
 
-	collection.findOne({
-		_id: req.params.id
-	}, function(err, doc) {
+	var _id = req.params.id;
 
-		if (err) {
-			return res.send(err);
-		}
-		if (!doc || !doc.content) {
-			return res.send(404, {
-				error: "document not found"
-			});
-		}
+	var pngFileName = _id + ".png";
+	var svgFileName = _id + '.svg';
 
+	var svgPathName = path.join('/', 'tmp', svgFileName);
+	var pngPathName = path.join('/', 'tmp', pngFileName);
 
-		var svgFileName = +new Date() + '' + Math.random();
-		pngFileName = svgFileName + ".png";
-		svgFileName += '.svg';
-
-		var svgPathName = path.join('/', 'tmp', svgFileName);
-		var pngPathName = path.join('/', 'tmp', pngFileName);
-
-		fs.writeFile(svgPathName, doc.svg, function(err) {
-			if (err) {
-				return res.send(err)
-			};
-			svg(svgPathName, pngPathName, function(err) {
+	fs.exists(pngPathName, function(exists) {
+		if (exists) {
+			return res.sendfile(pngPathName);
+		} else {
+			collection.findOne({
+				_id: _id
+			}, function(err, doc) {
 				if (err) {
-					return res.send(err)
-				};
-				res.sendFile(pngPathName);
-			});
-		})
-	})
+					return res.send(err);
+				}
+				if (!doc || !doc.svg) {
+					return res.send(404, {
+						error: "document not found"
+					});
+				}
+
+				fs.writeFile(svgPathName, doc.svg, function(err) {
+					if (err) {
+						return res.send(err)
+					};
+					svg(svgPathName, pngPathName, function(err) {
+						if (err) {
+							return res.send(err)
+						};
+						res.sendfile(pngPathName);
+					});
+				})
+			})
+		}
+	});
 });
-;
 
 var MongoClient = require('mongodb').MongoClient;
 var mongoURL = process.env.MONGOHQ_URL || "mongodb://127.0.0.1:27017/tcl";

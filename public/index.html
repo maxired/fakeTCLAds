@@ -5,13 +5,6 @@
   <script src="require.js"></script>
   <script src="js/bootstrap.js"></script>
 
-
-  <script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/rgbcolor.js"></script> 
-<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/StackBlur.js"></script>
-<script type="text/javascript" src="http://canvg.googlecode.com/svn/trunk/canvg.js"></script> 
-
-
-
 <link href="css/bootstrap.css" rel="stylesheet">
 <style type="text/css">
       body {
@@ -70,7 +63,6 @@
         <div class="span8">
           <h4>Résulat</h4>
           <p><span class="main"></span></p>
-          <canvas id="canvas" width="1000px" height="600px"></canvas> 
         </div>
 
         <div class="span4">
@@ -84,13 +76,16 @@
 MINUTES 
 DE LA FIN.</textarea>
 
-	<input type="button" name="render" value="valider" class="btn btn-success renderButton offset7"/>
-
-
-<input type="button" name="render" value="Partager" class="btn btn-success saveButton offset7"/>
+<input type="button" name="render" value="Partager" class="btn btn-success saveButton offset"/>
 
 </form>
-
+<div class="alert alert-success resultLink" style="visibility:hidden">
+<span class="beforeLink"></span>
+  <a class="link"></a>
+  <span class="afterLink"></span>
+  <div class="twitterLink"></div>
+  
+</div>
 
         </div>
       </div>
@@ -100,98 +95,7 @@ DE LA FIN.</textarea>
       <div class="footer">
         <p>&copy; Maxired & Neonix 2013</p>
       </div>
-
     </div>
-
-
-
-
-
-
-
-
-
-
 </body>
-
-
-<script>
-var render, data, svg;
-
-
-document.getElementsByClassName("renderButton")[0].onclick=function(){
-  var form = document.getElementsByClassName('myform')[0];
-data.image =  form.getElementsByClassName("url")[0].value || data.image;
-
-data.backgroundColor =  form.getElementsByClassName("color")[0].value || data.backgroundColor;
-data.linesUp =  [].concat(form.getElementsByClassName("content")[0].value.toUpperCase().split('\n')) || data.linesUp;
-
-render();
-}
-
-
-
-document.getElementsByClassName("saveButton")[0].onclick=function(){
-
-document.getElementsByClassName("renderButton")[0].onclick();
-
-canvg('canvas', document.getElementsByClassName('main')[0].innerHTML);
-
-var req = new XMLHttpRequest();
-req.open('POST', '/image', true);
-req.onreadystatechange = function (aEvt) {
-  if (req.readyState == 4) {
-     if(req.status == 200){
-     var content = JSON.parse(req.responseText) 
-    console.log("http://"+window.location.host+"/image/"+ content._id)
-    }
-     else
-      alert("Erreur pendant le chargement de la page.\n");
-  }
-};
-
-req.setRequestHeader("Content-Type", "application/json");
-req.send( JSON.stringify({ content : document.getElementById('canvas').toDataURL() } ) );
-
-};
-
-require(['text'], function(txt){
-require( ['lodash', 'text!tmpl.svg'], function(_,tmpl){
-  
-  data = {
-  image : "http://farm3.static.flickr.com/2760/4131129668_12df0df3d3.jpg",
-  textColor : "white",
- // backgroundColor : "#f373ac",
-  backgroundColor : "black",
- 
-  downTextColor:'#e3001b',
- // linesUp : ["À 3 ARRÊTS", "DE MON","PLAN CUL."],
- // linesUp : ["À 5 MIN. DE", "C'EST QUAND","QU'ON ARRIVE."],
-  linesUp : ["À 2", "MINUTES","DE LA FIN."],
- 
-  linesDown : ["PARTOUT","POUR","TOUS","IL Y A","TCL"," "],
-  height: 480,
-  width : 327,
-
-leftMarginUp:42,
-
-  lineHeight : 27,
-  bottomMargin:10,
-  leftMargin:10,
-  lineSpace: 5,
-  fontSize : 35
-};
-
-
-render= function(){
-  svg = _.template( tmpl , data);
-  document.getElementsByClassName('main')[0].innerHTML= svg;
-};
-
-
-render();
-});
-});
-
-</script>
+<script src="main.js" > </script> 
 </html>
