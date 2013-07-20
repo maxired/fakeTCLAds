@@ -39,7 +39,9 @@ document.getElementsByClassName("saveButton")[0].onclick = function() {
         resultlink.getElementsByClassName("link")[0].href = address;
         resultlink.getElementsByClassName("afterLink")[0].innerHTML = ".";
 
-        resultlink.getElementsByClassName("twitterLink")[0].innerHTML = twitterTmpl(address, 'Regarder ma nouvellle création ' + address);
+        resultlink.getElementsByClassName("twitterLink")[0].innerHTML = twitterTmpl(address, 'Regarder ma nouvellle création.');
+        twitterFunction(document, 'script', 'twitter-wjs');
+        facebookFunction(document, 'script', 'facebook-jssdk')
 
       } else
         alert("Erreur pendant le chargement de la page.\n");
@@ -98,9 +100,15 @@ require(['text'], function(txt) {
 
 
     require(['json'], function(json) {
-      require(['json!image/latests'], function(images) {
-        console.log(images);
+      require(['json!image/latests', 'text!latests.tmpl'], function(images, tmpl) {
+
+        document.getElementsByClassName('latests')[0].innerHTML = _.template(tmpl, {
+          images: images
+        })
+
+
       })
+
     })
   });
 });

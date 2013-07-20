@@ -87,15 +87,38 @@ DE LA FIN.</textarea>
   
 </div>
 
+      
         </div>
+ <div class="span8">
+          <h4>Les Dernières créations</h4>
+          <p><div class="latests"></div></p>
+        </div>
+
       </div>
 
       <hr>
-
       <div class="footer">
         <p>&copy; Maxired & Neonix 2013</p>
       </div>
     </div>
+    
+
+
 </body>
 <script src="main.js" > </script> 
+
+<script>
+var twitterFunction = function(d,s,id){
+console.log("hh");
+  var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}};
+</script>
+<div id="fb-root"></div>
+<script>
+var facebookFunction = function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=300647920079155";
+  fjs.parentNode.insertBefore(js, fjs);
+};</script>
 </html>

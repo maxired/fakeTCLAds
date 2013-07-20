@@ -48,7 +48,7 @@ app.post('/image', function(req, res) {
 app.get('/image/latests', function(req, res) {
 	var cursor = collection.find().sort({
 		date: -1
-	}).limit(10);
+	}).limit(3);
 
 	cursor.toArray(function(err, docs) {
 		res.json(docs);
