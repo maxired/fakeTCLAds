@@ -97,10 +97,13 @@ app.get('/image/:id', function(req, res) {
 	});
 });
 
+console.log("will connect to mongo")
 var MongoClient = require('mongodb').MongoClient;
 var mongoURL = process.env.MONGOHQ_URL || "mongodb://127.0.0.1:27017/tcl";
+console.log("will connect to mongo" +mongoURL )
 var collection;
 MongoClient.connect(mongoURL, function(err, db) {
+	console.log("connected to mongo" )
 	if (err) throw err;
 	collection = db.collection('images');
 
