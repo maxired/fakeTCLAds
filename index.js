@@ -1,3 +1,5 @@
+
+console.log("begining");
 var express = require("express"),
 	crypto = require('crypto');
 
