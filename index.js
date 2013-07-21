@@ -1,4 +1,3 @@
-
 console.log("begining");
 var express = require("express"),
 	crypto = require('crypto');
@@ -98,7 +97,13 @@ app.get('/image/:id', function(req, res) {
 		}
 	});
 });
+var port = process.env.PORT || 5000;
+app.listen(port, function() {
+	console.log("Listening on " + port);
+})
 
+
+/*
 console.log("will connect to mongo")
 var MongoClient = require('mongodb').MongoClient;
 var mongoURL = process.env.MONGOHQ_URL || "mongodb://127.0.0.1:27017/tcl";
@@ -109,8 +114,6 @@ MongoClient.connect(mongoURL, function(err, db) {
 	if (err) throw err;
 	collection = db.collection('images');
 
-	var port = process.env.PORT || 5000;
-	app.listen(port, function() {
-		console.log("Listening on " + port);
-	})
 })
+
+*/
